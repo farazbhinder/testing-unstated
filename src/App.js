@@ -15,7 +15,9 @@ class App extends Component {
       <Provider>
         <Subscribe to={[MyContainer]}>
           {myc => {
-            myc.fetchList1();
+            if (myc.state.list1 === null) {
+              myc.fetchList1();
+            }
             return (
               <div className="App">
                 <ListComponent list1={myc.state.list1} />

@@ -15,7 +15,7 @@ class ListComponent extends Component {
         {list1 === null
           ? null
           : list1.map(element => {
-              return <p>{element.title}</p>;
+              return <p key={element.id}>{element.title}</p>;
             })}
       </div>
     );
