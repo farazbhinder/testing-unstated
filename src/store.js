@@ -1,4 +1,5 @@
 import { Container } from 'unstated';
+import axios from 'axios';
 
 const defaultState = {
   test1: 'test1',
@@ -8,7 +9,6 @@ const defaultState = {
 class MyContainer extends Container {
   constructor(props) {
     super(props);
-
     this.state = this.readStorage();
   }
 
@@ -29,15 +29,11 @@ class MyContainer extends Container {
     }
   }
 
-  getList1() {
-    return this.state.list1;
-  }
-
-  setList1 = async list => {
-    console.log('in setList1');
+  fetchList1 = async () => {
+    let resp = await axios.get('https://jsonplaceholder.typicode.com/posts');
     await this.setState(state => {
       let retState = { ...state };
-      retState.list1 = JSON.parse(JSON.stringify(list));
+      retState.list1 = JSON.parse(JSON.stringify(resp.data));
       return retState;
     });
     this.syncStorage();
