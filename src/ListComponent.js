@@ -7,6 +7,7 @@ class ListComponent extends Component {
 
   render() {
     const { list1 } = this.props;
+    console.log('this.props');
     console.log(this.props);
 
     return (
