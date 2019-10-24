@@ -1,4 +1,5 @@
 import { Container } from 'unstated';
+import axios from 'axios';
 
 const defaultState = {
   test1: 'test1',
@@ -27,6 +28,19 @@ class MyContainer extends Container {
       const state = JSON.stringify(this.state);
       window.localStorage.setItem('appState', state);
     }
+  }
+
+  fetchList1() {
+    axios
+      .get('https://jsonplaceholder.typicode.com/posts')
+      .then(resp => {
+        console.log('resp.data is ');
+        console.log(resp.data);
+        this.setList1(resp.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   getList1() {
